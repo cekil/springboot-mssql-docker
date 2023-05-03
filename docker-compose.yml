@@ -1,0 +1,25 @@
+version: '3'
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    container_name: mssql
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=MyStrongPassword123
+      - MSSQL_PID=Express
+      - MSSQL_AGENT_ENABLED=true
+      - MSSQL_ENABLE_HADR=false
+      - MSSQL_COLLATION=SQL_Latin1_General_CP1_CI_AS
+      - 'MSSQL_LCID=1033'
+      - 'MSSQL_MEMORY_LIMIT_MB=2048'
+      - 'MSSQL_COMPATIBILITY_LEVEL=110'
+      - 'MSSQL_USER_DB_DIR=/var/opt/mssql/data/userdb'
+      - 'MSSQL_DATA_DIR=/var/opt/mssql/data'
+      - 'MSSQL_BACKUP_DIR=/var/opt/mssql/data/backup'
+    ports:
+      - "1433:1433"
+    volumes:
+      - dbdata:/var/opt/mssql/data
+
+volumes:
+  dbdata:
